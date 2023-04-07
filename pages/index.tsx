@@ -4,18 +4,31 @@ import styled from "styled-components";
 import Inputs from "../components/shared/Inputs";
 import Button from "../components/shared/Button";
 import Display from "../components/shared/Display";
+import { FormEventHandler, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const [form, setForm] = useState({
+    day: "",
+    month: "",
+    year: "",
+  });
+
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    console.log("formulario enviado");
+  };
+
   return (
     <>
       <Section>
         <Container>
-          <InputContainer>
-            <Inputs />
+          <form onSubmit={handleSubmit}>
+            <Inputs form={form} setForm={setForm} />
             <Button />
-          </InputContainer>
+          </form>
           <Display />
         </Container>
       </Section>
@@ -52,5 +65,3 @@ const Container = styled.div`
 //   border: none;
 //   background-color: rgba(220, 220, 220, 1);
 // `;
-
-const InputContainer = styled.form``;

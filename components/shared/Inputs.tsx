@@ -1,21 +1,56 @@
 import styled from "styled-components";
 import { Input, InputLabel } from "./styles";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const Inputs = (): JSX.Element => {
+interface InputsProps {
+  form: {
+    day: string;
+    month: string;
+    year: string;
+  };
+
+  setForm: Dispatch<
+    SetStateAction<{
+      day: string;
+      month: string;
+      year: string;
+    }>
+  >;
+}
+
+const Inputs = ({ form, setForm }: InputsProps): JSX.Element => {
   return (
     <>
       <Container>
         <div>
           <InputLabel>Day</InputLabel>
-          <Input />
+          <Input
+            placeholder='DD'
+            value={form.day}
+            onChange={(e) => {
+              setForm({ ...form, day: e.target.value });
+            }}
+          />
         </div>
         <div>
           <InputLabel>Month</InputLabel>
-          <Input />
+          <Input
+            placeholder='MM'
+            value={form.month}
+            onChange={(e) => {
+              setForm({ ...form, month: e.target.value });
+            }}
+          />
         </div>
         <div>
           <InputLabel>Year</InputLabel>
-          <Input />
+          <Input
+            placeholder='YYYY'
+            value={form.year}
+            onChange={(e) => {
+              setForm({ ...form, year: e.target.value });
+            }}
+          />
         </div>
       </Container>
     </>
